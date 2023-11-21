@@ -11,8 +11,8 @@ info = {
 
 	 } 
 
-with open('output.json', 'w') as file:
-		json.dump(info, file, indent=4)
+	with open('output.json', 'w') as file:
+		json.dump(existing_data, file, indent=4)
 
 data = []
 
@@ -42,19 +42,25 @@ def end():
 		existing_data = json.load(file)
 
 	existing_data.update(info)
+	if os.path.exists('output.csv'):
+		with open('output.csv', 'a', newline = "") as file:
+			rows = []
+			rows.append(info)
+			print(rows)
+			fireldnames = ["name", "karma", "choice 1","choice 2", "choice 3", "choice 4", "choice 5" ]
+			writer = csv.DictWriter(file, fieldnames = fieldnames, de;o,oter = ';')
+			writer.writerows(rows)
+			read
 
-	with open('output.json', 'w') as file:
-		json.dump(existing_data, file, indent=4)
 
-
-
-	with open('output.cvs', 'w', newline="")as file:
-		fieldnames = ["name","karma","choice 1","choice 2","choice 3","choice 4","choice 5"]
-		writer = csv.DictWriter(file,fieldnames = fieldnames)
-		writer.writeheader()
-	for row in info:
-		writer.writerow(row)
-	read()
+	else:
+		with open('output.cvs', 'a', newline="")as file:
+			fieldnames = ["name","karma","choice 1","choice 2","choice 3","choice 4","choice 5"]
+			writer = csv.DictWriter(file,fieldnames = fieldnames)
+			writer.writeheader()
+		for row in info:
+			writer.writerow(row)
+		read()
 
 while karma >= 0 and read() != "!":
 
